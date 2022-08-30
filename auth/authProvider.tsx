@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { supabase } from "../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 type ContextProps = {
@@ -45,4 +45,12 @@ const AuthProvider = (props: Props) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+const useUser = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error(`useUser must be used within a UserContextProvider.`);
+  }
+  return context;
+};
+
+export { AuthContext, AuthProvider, useUser };

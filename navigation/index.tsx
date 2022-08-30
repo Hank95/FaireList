@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../auth/authProvider";
+import { AuthContext, useUser } from "../auth/authProvider";
 
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -8,6 +8,9 @@ import Auth from "./AuthStack";
 import Loading from "../screens/utils/Loading";
 
 export default () => {
+  const theUser = useUser();
+  console.log(theUser.session?.user?.id);
+
   const auth = useContext(AuthContext);
   const user = auth.user;
   return (
